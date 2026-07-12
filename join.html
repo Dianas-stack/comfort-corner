@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Comfort Circle | You Don't Have to Heal Alone</title>
+<meta name="description" content="A private community for anyone facing grief, pet loss, caregiving, or recovery. You don't have to heal alone.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --forest:#2D4A32;
+    --sage-deep:#4A6E50;
+    --sage:#7A9E7E;
+    --sage-light:#B5CCB1;
+    --sage-mist:#D8E8D4;
+
+    --white:#FDFAF6;
+    --cream:#F5F0E8;
+    --cream-warm:#EDE5D5;
+    --tan:#C8A96E;
+    --tan-light:#E2D0A8;
+
+    --blush:#E8A0A8;
+    --blush-light:#F5C8CC;
+    --gray-soft:#C4C4BC;
+    --gray-warm:#8C8880;
+
+    --font-display:'Playfair Display', Georgia, serif;
+    --font-body:'Cormorant Garamond', Georgia, serif;
+    --font-ui:'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+    --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+
+    --radius-sm:4px; --radius-md:8px; --radius-lg:16px; --radius-xl:24px;
+
+    --shadow-card:0 2px 12px rgba(45,74,50,0.08);
+    --shadow-lift:0 8px 32px rgba(45,74,50,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--forest);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  .container{ max-width:1080px; margin:0 auto; padding:0 var(--space-5); }
+  section{ padding:var(--space-8) 0; position:relative; }
+
+  .eyebrow{
+    font-family:var(--font-ui);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:var(--space-2);
+    margin-bottom:var(--space-4);
+  }
+  .eyebrow::before{
+    content:"";
+    width:20px; height:1px;
+    background:var(--sage);
+  }
+
+  h1,h2,h3{ font-family:var(--font-display); font-weight:400; line-height:1.15; color:var(--forest); }
+  em{ font-style:italic; color:var(--sage-deep); }
+
+  .skip-link{
+    position:absolute; left:-999px; top:0;
+    background:var(--forest); color:var(--white);
+    padding:var(--space-3) var(--space-4); z-index:999;
+    font-family:var(--font-ui); font-size:13px;
+  }
+  .skip-link:focus{ left:var(--space-3); top:var(--space-3); }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(253,250,246,0.92);
+    border-bottom:1px solid var(--sage-mist);
+    backdrop-filter:none;
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:0 var(--space-5);
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+  }
+  .brand{ display:flex; align-items:center; gap:var(--space-2); font-family:var(--font-display); font-size:19px; color:var(--forest); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .brand-logo{
+    flex:none;
+    width:78px; height:52px;
+    display:block;
+    background-image:url('logo.png');
+    background-repeat:no-repeat;
+    background-size:96px 96px;
+    background-position:-10px -27px;
+  }
+
+  @media (max-width:480px){
+    .brand-text{ display:none; }
+    .brand-logo{ width:64px; height:43px; background-size:80px 80px; background-position:-8px -22px; }
+    .btn-nav{ font-size:11px; padding:10px 14px; }
+  }
+
+  .nav-links{ display:none; align-items:center; gap:var(--space-6); }
+  .nav-links a{
+    font-family:var(--font-ui); font-size:13px; font-weight:500;
+    letter-spacing:0.04em; color:var(--forest); opacity:0.75;
+    transition:opacity 0.2s ease;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--sage-deep); }
+
+  @media (min-width:760px){
+    .nav-links{ display:flex; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family:var(--font-ui);
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border:none;
+    border-radius:var(--radius-sm);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-2);
+    transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--sage-deep);
+    color:var(--white);
+    padding:14px 24px;
+    box-shadow:var(--shadow-card);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-lift);
+    background:var(--forest);
+  }
+  .btn-primary:active{ transform:translateY(-1px); }
+
+  .btn-nav{
+    padding:10px 16px;
+    font-size:11.5px;
+    flex-shrink:0;
+  }
+
+  .btn .sparkle{
+    width:14px; height:14px;
+    animation:sparkle-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes sparkle-pulse{
+    0%,100%{ transform:scale(1) rotate(0deg); opacity:0.85; }
+    50%{ transform:scale(1.25) rotate(15deg); opacity:1; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:var(--space-9);
+    padding-bottom:var(--space-9);
+    overflow:hidden;
+  }
+  .hero-mesh{
+    position:absolute; inset:0; z-index:0;
+    background:var(--cream);
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:none;
+    opacity:0.55;
+    will-change:transform;
+  }
+  .blob-1{
+    width:56vw; height:56vw; max-width:640px; max-height:640px;
+    left:-14vw; top:-18vw;
+    background:radial-gradient(circle, var(--sage-mist) 0%, rgba(216,232,212,0) 70%);
+    animation:float-a 22s ease-in-out infinite;
+  }
+  .blob-2{
+    width:50vw; height:50vw; max-width:560px; max-height:560px;
+    right:-16vw; top:-8vw;
+    background:radial-gradient(circle, var(--tan-light) 0%, rgba(226,208,168,0) 72%);
+    animation:float-b 26s ease-in-out infinite;
+  }
+  .blob-3{
+    width:44vw; height:44vw; max-width:480px; max-height:480px;
+    left:8vw; bottom:-20vw;
+    background:radial-gradient(circle, var(--blush-light) 0%, rgba(245,200,204,0) 70%);
+    animation:float-c 20s ease-in-out infinite;
+  }
+  .blob-4{
+    width:36vw; height:36vw; max-width:420px; max-height:420px;
+    right:6vw; bottom:-14vw;
+    background:radial-gradient(circle, var(--sage-light) 0%, rgba(181,204,177,0) 70%);
+    animation:float-a 30s ease-in-out infinite reverse;
+  }
+  @keyframes float-a{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(3%, 4%) scale(1.06); }
+  }
+  @keyframes float-b{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-4%, 3%) scale(1.08); }
+  }
+  @keyframes float-c{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(2%, -3%) scale(1.05); }
+  }
+
+  .hero-inner{ position:relative; z-index:1; text-align:center; max-width:760px; margin:0 auto; }
+
+  .hero h1{
+    font-size:clamp(34px, 6.2vw, 58px);
+    margin-bottom:var(--space-5);
+  }
+  .headline-word{ position:relative; display:inline-block; color:var(--sage-deep); font-style:italic; }
+  .headline-word svg{
+    position:absolute;
+    left:0; bottom:-0.14em;
+    width:100%; height:0.3em;
+    overflow:visible;
+  }
+  .headline-word path{
+    stroke:var(--tan);
+    stroke-width:5;
+    fill:none;
+    stroke-linecap:round;
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    animation:draw-underline 1.1s ease-out 0.5s forwards;
+  }
+  @keyframes draw-underline{ to{ stroke-dashoffset:0; } }
+
+  .hero-sub{
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:clamp(17px, 2.4vw, 21px);
+    color:var(--gray-warm);
+    max-width:540px;
+    margin:0 auto var(--space-7);
+  }
+
+  .join-form{
+    display:flex;
+    flex-direction:column;
+    gap:var(--space-3);
+    max-width:460px;
+    margin:0 auto;
+  }
+  @media (min-width:540px){
+    .join-form{ flex-direction:row; }
+  }
+  .join-form input[type="email"]{
+    flex:1;
+    font-family:var(--font-body);
+    font-size:16px;
+    color:var(--forest);
+    background:var(--white);
+    border:1.5px solid var(--sage-light);
+    border-radius:var(--radius-sm);
+    padding:14px 18px;
+    transition:border-color 0.2s ease;
+  }
+  .join-form input[type="email"]::placeholder{ font-style:italic; color:var(--gray-soft); }
+  .join-form input[type="email"]:focus{ outline:none; border-color:var(--sage); }
+  .join-form .btn-primary{ padding:14px 22px; }
+
+  .form-note{
+    font-family:var(--font-ui);
+    font-size:11px;
+    letter-spacing:0.03em;
+    color:var(--gray-warm);
+    margin-top:var(--space-3);
+  }
+
+  .form-success{
+    display:none;
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--sage-deep);
+    background:var(--sage-mist);
+    border-radius:var(--radius-sm);
+    padding:var(--space-3) var(--space-4);
+    max-width:460px;
+    margin:var(--space-3) auto 0;
+  }
+  .form-success.visible{ display:block; }
+
+  .proof{
+    margin-top:var(--space-6);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--gray-warm);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-2);
+  }
+  .proof strong{ color:var(--forest); font-weight:500; }
+
+  .scroll-cue{
+    margin:var(--space-8) auto 0;
+    width:22px; height:34px;
+    border:1.5px solid var(--sage);
+    border-radius:100px;
+    position:relative;
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute;
+    top:6px; left:50%;
+    width:4px; height:8px;
+    background:var(--sage-deep);
+    border-radius:2px;
+    transform:translateX(-50%);
+    animation:cue-bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes cue-bounce{
+    0%,100%{ transform:translate(-50%,0); opacity:1; }
+    50%{ transform:translate(-50%,10px); opacity:0.4; }
+  }
+
+  /* ---------- Reveal (progressive enhancement) ---------- */
+  html.js .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  html.js .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- Promise ---------- */
+  .promise{ background:var(--cream-warm); text-align:center; }
+  .promise-inner{ max-width:700px; margin:0 auto; }
+  .promise p{
+    font-family:var(--font-body);
+    font-size:clamp(20px, 3vw, 26px);
+    font-weight:300;
+    line-height:1.55;
+    color:var(--forest);
+  }
+  .promise p.small{
+    font-size:clamp(16px, 2vw, 18px);
+    color:var(--gray-warm);
+    margin-top:var(--space-5);
+  }
+
+  /* ---------- Botanical band ---------- */
+  .botanical-band{
+    position:relative;
+    height:240px;
+    background-image:url('band_lavender.jpg');
+    background-size:cover;
+    background-position:center 45%;
+    background-repeat:no-repeat;
+  }
+  .botanical-band::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom, var(--cream-warm) 0%, rgba(237,229,213,0.05) 22%, rgba(245,240,232,0.05) 78%, var(--cream) 100%);
+  }
+  @media (max-width:560px){ .botanical-band{ height:150px; } }
+
+  /* ---------- Benefits ---------- */
+  .benefits-head{ text-align:center; max-width:600px; margin:0 auto var(--space-8); }
+  .benefits-head h2{ font-size:clamp(28px, 4vw, 38px); }
+
+  .benefit-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--space-5);
+  }
+  @media (min-width:760px){
+    .benefit-grid{ grid-template-columns:repeat(3, 1fr); gap:var(--space-6); }
+  }
+  .benefit-card{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:var(--space-6) var(--space-5);
+    text-align:center;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .benefit-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-lift);
+  }
+  .check-icon{
+    width:52px; height:52px;
+    margin:0 auto var(--space-5);
+  }
+  .check-icon circle{
+    fill:var(--sage-mist);
+  }
+  .check-icon path{
+    stroke:var(--sage-deep);
+    stroke-width:2.6;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:32;
+    stroke-dashoffset:0;
+  }
+  html.js .check-icon path{
+    stroke-dashoffset:32;
+    transition:stroke-dashoffset 0.7s ease 0.15s;
+  }
+  html.js .reveal.in-view .check-icon path{
+    stroke-dashoffset:0;
+  }
+  .benefit-card p{
+    font-family:var(--font-body);
+    font-size:19px;
+    color:var(--forest);
+    line-height:1.5;
+  }
+
+  /* ---------- Testimonial ---------- */
+  .testimonial{ background:var(--cream-warm); }
+  .testimonial-card{
+    max-width:680px;
+    margin:0 auto;
+    background:var(--white);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-card);
+    padding:var(--space-7) var(--space-6);
+    text-align:center;
+  }
+  .quote-icon{ width:34px; height:34px; margin:0 auto var(--space-4); }
+  .quote-icon path{ fill:var(--sage-light); }
+  .testimonial-card p.quote{
+    font-family:var(--font-body);
+    font-style:italic;
+    font-size:clamp(19px, 2.6vw, 23px);
+    color:var(--forest);
+    line-height:1.6;
+    margin-bottom:var(--space-6);
+  }
+  .testimonial-attr{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-3);
+  }
+  .avatar{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--sage-mist);
+    color:var(--sage-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-ui);
+    font-size:14px;
+    font-weight:500;
+  }
+  .testimonial-attr .who{ text-align:left; }
+  .testimonial-attr .name{ font-family:var(--font-ui); font-size:13px; font-weight:500; color:var(--forest); }
+  .testimonial-attr .ctx{ font-family:var(--font-ui); font-size:12px; color:var(--gray-warm); }
+
+  /* ---------- Objection banner ---------- */
+  .banner{
+    background:linear-gradient(135deg, var(--forest), var(--sage-deep));
+    text-align:center;
+  }
+  .banner .container{ max-width:640px; }
+  .banner-icon{ width:30px; height:30px; margin:0 auto var(--space-5); }
+  .banner-icon path{ stroke:var(--tan-light); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .banner p{
+    font-family:var(--font-display);
+    font-size:clamp(21px, 3.2vw, 28px);
+    font-style:italic;
+    color:var(--white);
+    line-height:1.4;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-head{ text-align:center; max-width:600px; margin:0 auto var(--space-7); }
+  .faq-head h2{ font-size:clamp(28px, 4vw, 38px); }
+  .faq-list{ max-width:680px; margin:0 auto; }
+  .faq-item{
+    border-bottom:1px solid var(--sage-mist);
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:var(--space-4);
+    padding:var(--space-5) 0;
+    font-family:var(--font-ui);
+    font-size:16px;
+    font-weight:500;
+    color:var(--forest);
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-chevron{ width:14px; height:14px; flex-shrink:0; transition:transform 0.25s ease; }
+  .faq-chevron path{ stroke:var(--sage-deep); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .faq-item[open] .faq-chevron{ transform:rotate(180deg); }
+  .faq-item p{
+    font-family:var(--font-body);
+    font-size:18px;
+    color:var(--gray-warm);
+    padding-bottom:var(--space-5);
+    max-width:600px;
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align:center;
+    background:var(--cream-warm);
+  }
+  .final-cta h2{
+    font-size:clamp(30px, 5vw, 44px);
+    max-width:640px;
+    margin:0 auto var(--space-3);
+  }
+  .final-cta .hero-sub{ margin-bottom:var(--space-6); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:var(--space-6) 0 var(--space-7);
+    font-family:var(--font-ui);
+    font-size:12px;
+    color:var(--gray-warm);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#join">Skip to join form</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#hero" aria-label="Comfort Corner by Diana, home">
+      <span class="brand-logo" role="img" aria-label="Comfort Corner by Diana logo"></span>
+      <span class="brand-text">The Comfort Circle</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#join" class="btn btn-primary btn-nav">Join Free — Never Feel Alone</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-mesh" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+    <div class="container hero-inner">
+      <span class="eyebrow">A PRIVATE COMMUNITY</span>
+      <h1>You don't have to heal <span class="headline-word">alone
+        <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M4 12 C 40 4, 80 18, 110 9 C 140 1, 170 15, 196 8" />
+        </svg>
+      </span>.</h1>
+      <p class="hero-sub">For grief, pet loss, caregiving, and recovery — a quiet place with people who already understand, without you having to explain it first.</p>
+
+      <form class="join-form" id="join-form-hero">
+        <label for="email-hero" class="visually-hidden" style="position:absolute;left:-9999px;">Email address</label>
+        <input type="email" id="email-hero" name="email" placeholder="you@example.com" required>
+        <button type="submit" class="btn btn-primary">
+          <svg class="sparkle" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z" fill="#FDFAF6"/></svg>
+          Join Free — Never Feel Alone
+        </button>
+      </form>
+      <p class="form-success" id="form-success-hero">You're in. Check your inbox to confirm — we'll see you on the other side.</p>
+      <p class="form-note">Free to join. No spam. Leave anytime, one click.</p>
+
+      <p class="proof"><strong><span class="count-up" data-target="1200">1,200+</span></strong> people already in the circle</p>
+
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Promise -->
+  <section class="promise" id="how-it-works">
+    <div class="container promise-inner reveal">
+      <span class="eyebrow" style="justify-content:center;">HOW IT WORKS</span>
+      <p>Join a private community of people who understand exactly what you're going through — because they're living it too.</p>
+      <p class="small">Ask the hard questions, share the bad days, and get answered by people who won't look away.</p>
+    </div>
+  </section>
+
+  <div class="botanical-band" role="img" aria-label="Soft lavender sprigs at golden hour"></div>
+
+  <!-- Benefits -->
+  <section class="benefits" id="benefits">
+    <div class="container">
+      <div class="benefits-head reveal">
+        <span class="eyebrow" style="justify-content:center;">WHAT CHANGES</span>
+        <h2>What you get inside</h2>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Stop feeling like the only one who gets it</p>
+        </div>
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Get real answers from people who've actually been there</p>
+        </div>
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Feel less alone the next time it gets hard — because someone will be there</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="testimonial">
+    <div class="container">
+      <div class="testimonial-card reveal">
+        <svg class="quote-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8c-2.2 0-4 1.8-4 4v6h6v-6H6c0-1.1.9-2 2-2V8zm11 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8z"/></svg>
+        <p class="quote">"After I lost my mom, nobody in my everyday life understood why I was fine on Tuesday and wrecked on Wednesday. This group did. I finally stopped feeling like I was the only one still not okay."</p>
+        <div class="testimonial-attr">
+          <div class="avatar">M.</div>
+          <div class="who">
+            <div class="name">M., community member</div>
+            <div class="ctx">Joined after losing her mom</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objection killer -->
+  <section class="banner">
+    <div class="container reveal">
+      <svg class="banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+      <p>This isn't another sales list — no spam, no sales pitches, just people who show up for each other.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="faq-head reveal">
+        <span class="eyebrow" style="justify-content:center;">BEFORE YOU JOIN</span>
+        <h2>A few honest answers</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Is this therapy or a support group?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>No. It's a community of people who understand what you're carrying — not a clinical service. If you need professional support, we'll always point you toward it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will I get spammed with sales emails?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>No. This list exists for connection, not for selling to you. Just honest notes and a place to land when you need one.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if I'm not ready to share yet?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>You don't have to. Read, sit with it, and join the conversation whenever — or if — you're ready. There's no pressure here.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I leave anytime?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>Yes. One click, no questions asked, no guilt trip on the way out.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="join">
+    <div class="container reveal">
+      <h2>You don't have to heal alone.</h2>
+      <p class="hero-sub">Come as you are. The circle is already here.</p>
+      <form class="join-form" id="join-form-final">
+        <label for="email-final" class="visually-hidden" style="position:absolute;left:-9999px;">Email address</label>
+        <input type="email" id="email-final" name="email" placeholder="you@example.com" required>
+        <button type="submit" class="btn btn-primary">
+          <svg class="sparkle" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z" fill="#FDFAF6"/></svg>
+          Join Free — Never Feel Alone
+        </button>
+      </form>
+      <p class="form-success" id="form-success-final">You're in. Check your inbox to confirm — we'll see you on the other side.</p>
+      <p class="form-note">Free to join. No spam. Leave anytime, one click.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; The Comfort Circle, a Comfort Corner by Diana community. Your inbox stays yours — always.
+</footer>
+
+<!-- NOTE FOR DIANA: connect join-form-hero and join-form-final to your ESP (Klaviyo) by
+     replacing each form's default behavior with your embed's action URL / API endpoint. -->
+
+<script>
+  document.documentElement.classList.add('js');
+
+  function handleJoin(formId, successId){
+    var form = document.getElementById(formId);
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById(successId).classList.add('visible');
+      form.reset();
+    });
+  }
+  handleJoin('join-form-hero', 'form-success-hero');
+  handleJoin('join-form-final', 'form-success-final');
+
+  if('IntersectionObserver' in window){
+    var revealItems = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    revealItems.forEach(function(el){ io.observe(el); });
+
+    var counters = document.querySelectorAll('.count-up');
+    var counted = new WeakSet();
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !counted.has(entry.target)){
+          counted.add(entry.target);
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var start = 0;
+          var duration = 1200;
+          var startTime = null;
+          function step(ts){
+            if(!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var value = Math.floor(progress * target);
+            el.textContent = value.toLocaleString() + '+';
+            if(progress < 1){ requestAnimationFrame(step); }
+            else { el.textContent = target.toLocaleString() + '+'; }
+          }
+          requestAnimationFrame(step);
+          cio.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+  }
+</script>
+
+</body>
+</html>
