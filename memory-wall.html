@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Memory Wall | They Deserve to Be Remembered Out Loud</title>
+<meta name="description" content="Share a photo and a memory of the parent, pet, or person you lost. We'll add them to our Memory Wall on Instagram and Facebook, so their story gets told, not tucked away.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --forest:#2D4A32;
+    --sage-deep:#4A6E50;
+    --sage:#7A9E7E;
+    --sage-light:#B5CCB1;
+    --sage-mist:#D8E8D4;
+
+    --white:#FDFAF6;
+    --cream:#F5F0E8;
+    --cream-warm:#EDE5D5;
+    --tan:#C8A96E;
+    --tan-light:#E2D0A8;
+
+    --blush:#E8A0A8;
+    --blush-light:#F5C8CC;
+    --gray-soft:#C4C4BC;
+    --gray-warm:#8C8880;
+
+    --font-display:'Playfair Display', Georgia, serif;
+    --font-body:'Cormorant Garamond', Georgia, serif;
+    --font-ui:'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+    --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+
+    --radius-sm:4px; --radius-md:8px; --radius-lg:16px; --radius-xl:24px;
+
+    --shadow-card:0 2px 12px rgba(45,74,50,0.08);
+    --shadow-lift:0 8px 32px rgba(45,74,50,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--forest);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  .container{ max-width:1080px; margin:0 auto; padding:0 var(--space-5); }
+  section{ padding:var(--space-8) 0; position:relative; }
+
+  .eyebrow{
+    font-family:var(--font-ui);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sage-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:var(--space-2);
+    margin-bottom:var(--space-4);
+  }
+  .eyebrow::before{
+    content:"";
+    width:20px; height:1px;
+    background:var(--sage);
+  }
+
+  h1,h2,h3{ font-family:var(--font-display); font-weight:400; line-height:1.15; color:var(--forest); }
+  em{ font-style:italic; color:var(--sage-deep); }
+
+  .skip-link{
+    position:absolute; left:-999px; top:0;
+    background:var(--forest); color:var(--white);
+    padding:var(--space-3) var(--space-4); z-index:999;
+    font-family:var(--font-ui); font-size:13px;
+  }
+  .skip-link:focus{ left:var(--space-3); top:var(--space-3); }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(253,250,246,0.92);
+    border-bottom:1px solid var(--sage-mist);
+    backdrop-filter:none;
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:0 var(--space-5);
+    height:64px; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+  }
+  .brand{ display:flex; align-items:center; gap:var(--space-2); font-family:var(--font-display); font-size:19px; color:var(--forest); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .brand-logo{
+    flex:none;
+    width:78px; height:52px;
+    display:block;
+    background-image:url('logo.png');
+    background-repeat:no-repeat;
+    background-size:96px 96px;
+    background-position:-10px -27px;
+  }
+
+  @media (max-width:900px){
+    .brand-text{ display:none; }
+    .brand{ flex-shrink:0; }
+  }
+  @media (max-width:480px){
+    .brand-logo{ width:64px; height:43px; background-size:80px 80px; background-position:-8px -22px; }
+    .nav-inner{ height:auto; min-height:64px; padding-top:8px; padding-bottom:8px; }
+    .btn-nav{ font-size:11px; padding:10px 14px; white-space:normal; text-align:center; line-height:1.3; }
+  }
+
+  .nav-links{ display:none; align-items:center; gap:var(--space-6); flex-shrink:0; }
+  .nav-links a{
+    font-family:var(--font-ui); font-size:13px; font-weight:500;
+    letter-spacing:0.04em; color:var(--forest); opacity:0.75;
+    transition:opacity 0.2s ease;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--sage-deep); }
+
+  @media (min-width:760px){
+    .nav-links{ display:flex; }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family:var(--font-ui);
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border:none;
+    border-radius:var(--radius-sm);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-2);
+    transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--sage-deep);
+    color:var(--white);
+    padding:14px 24px;
+    box-shadow:var(--shadow-card);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-lift);
+    background:var(--forest);
+  }
+  .btn-primary:active{ transform:translateY(-1px); }
+
+  .btn-nav{
+    padding:10px 16px;
+    font-size:11px;
+    flex-shrink:0;
+    letter-spacing:0.03em;
+  }
+
+  .btn .sparkle{
+    width:14px; height:14px;
+    animation:sparkle-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes sparkle-pulse{
+    0%,100%{ transform:scale(1) rotate(0deg); opacity:0.85; }
+    50%{ transform:scale(1.25) rotate(15deg); opacity:1; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:var(--space-9);
+    padding-bottom:var(--space-9);
+    overflow:hidden;
+  }
+  .hero-mesh{
+    position:absolute; inset:0; z-index:0;
+    background:var(--cream);
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:none;
+    opacity:0.55;
+    will-change:transform;
+  }
+  .blob-1{
+    width:56vw; height:56vw; max-width:640px; max-height:640px;
+    left:-14vw; top:-18vw;
+    background:radial-gradient(circle, var(--sage-mist) 0%, rgba(216,232,212,0) 70%);
+    animation:float-a 22s ease-in-out infinite;
+  }
+  .blob-2{
+    width:50vw; height:50vw; max-width:560px; max-height:560px;
+    right:-16vw; top:-8vw;
+    background:radial-gradient(circle, var(--tan-light) 0%, rgba(226,208,168,0) 72%);
+    animation:float-b 26s ease-in-out infinite;
+  }
+  .blob-3{
+    width:44vw; height:44vw; max-width:480px; max-height:480px;
+    left:8vw; bottom:-20vw;
+    background:radial-gradient(circle, var(--blush-light) 0%, rgba(245,200,204,0) 70%);
+    animation:float-c 20s ease-in-out infinite;
+  }
+  .blob-4{
+    width:36vw; height:36vw; max-width:420px; max-height:420px;
+    right:6vw; bottom:-14vw;
+    background:radial-gradient(circle, var(--sage-light) 0%, rgba(181,204,177,0) 70%);
+    animation:float-a 30s ease-in-out infinite reverse;
+  }
+  @keyframes float-a{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(3%, 4%) scale(1.06); }
+  }
+  @keyframes float-b{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-4%, 3%) scale(1.08); }
+  }
+  @keyframes float-c{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(2%, -3%) scale(1.05); }
+  }
+
+  .hero-inner{ position:relative; z-index:1; text-align:center; max-width:760px; margin:0 auto; }
+
+  .hero h1{
+    font-size:clamp(34px, 6.2vw, 58px);
+    margin-bottom:var(--space-5);
+  }
+  .headline-word{ position:relative; display:inline-block; color:var(--sage-deep); font-style:italic; }
+  .headline-word svg{
+    position:absolute;
+    left:0; bottom:-0.14em;
+    width:100%; height:0.3em;
+    overflow:visible;
+  }
+  .headline-word path{
+    stroke:var(--tan);
+    stroke-width:5;
+    fill:none;
+    stroke-linecap:round;
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    animation:draw-underline 1.1s ease-out 0.5s forwards;
+  }
+  @keyframes draw-underline{ to{ stroke-dashoffset:0; } }
+
+  .hero-sub{
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:clamp(17px, 2.4vw, 21px);
+    color:var(--gray-warm);
+    max-width:540px;
+    margin:0 auto var(--space-7);
+  }
+
+  .share-action{
+    display:flex;
+    justify-content:center;
+    margin:0 auto;
+  }
+
+  .form-note{
+    font-family:var(--font-ui);
+    font-size:11px;
+    letter-spacing:0.03em;
+    color:var(--gray-warm);
+    margin-top:var(--space-3);
+  }
+
+  .proof{
+    margin-top:var(--space-6);
+    font-family:var(--font-ui);
+    font-size:13px;
+    color:var(--gray-warm);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-2);
+  }
+  .proof strong{ color:var(--forest); font-weight:500; }
+
+  .scroll-cue{
+    margin:var(--space-8) auto 0;
+    width:22px; height:34px;
+    border:1.5px solid var(--sage);
+    border-radius:100px;
+    position:relative;
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute;
+    top:6px; left:50%;
+    width:4px; height:8px;
+    background:var(--sage-deep);
+    border-radius:2px;
+    transform:translateX(-50%);
+    animation:cue-bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes cue-bounce{
+    0%,100%{ transform:translate(-50%,0); opacity:1; }
+    50%{ transform:translate(-50%,10px); opacity:0.4; }
+  }
+
+  /* ---------- Reveal (progressive enhancement) ---------- */
+  html.js .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  html.js .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- Promise ---------- */
+  .promise{ background:var(--cream-warm); text-align:center; }
+  .promise-inner{ max-width:700px; margin:0 auto; }
+  .promise p{
+    font-family:var(--font-body);
+    font-size:clamp(20px, 3vw, 26px);
+    font-weight:300;
+    line-height:1.55;
+    color:var(--forest);
+  }
+  .promise p.small{
+    font-size:clamp(16px, 2vw, 18px);
+    color:var(--gray-warm);
+    margin-top:var(--space-5);
+  }
+
+  /* ---------- Botanical band ---------- */
+  .botanical-band{
+    position:relative;
+    height:240px;
+    background-image:url('1.png');
+    background-size:cover;
+    background-position:center 40%;
+    background-repeat:no-repeat;
+  }
+  .botanical-band::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom, var(--cream-warm) 0%, rgba(237,229,213,0.05) 22%, rgba(245,240,232,0.05) 78%, var(--cream) 100%);
+  }
+  @media (max-width:560px){ .botanical-band{ height:150px; } }
+
+  /* ---------- Benefits ---------- */
+  .benefits-head{ text-align:center; max-width:600px; margin:0 auto var(--space-8); }
+  .benefits-head h2{ font-size:clamp(28px, 4vw, 38px); }
+
+  .benefit-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--space-5);
+  }
+  @media (min-width:760px){
+    .benefit-grid{ grid-template-columns:repeat(3, 1fr); gap:var(--space-6); }
+  }
+  .benefit-card{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:var(--space-6) var(--space-5);
+    text-align:center;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .benefit-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow-lift);
+  }
+  .check-icon{
+    width:52px; height:52px;
+    margin:0 auto var(--space-5);
+  }
+  .check-icon circle{
+    fill:var(--sage-mist);
+  }
+  .check-icon path{
+    stroke:var(--sage-deep);
+    stroke-width:2.6;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:32;
+    stroke-dashoffset:0;
+  }
+  html.js .check-icon path{
+    stroke-dashoffset:32;
+    transition:stroke-dashoffset 0.7s ease 0.15s;
+  }
+  html.js .reveal.in-view .check-icon path{
+    stroke-dashoffset:0;
+  }
+  .benefit-card p{
+    font-family:var(--font-body);
+    font-size:19px;
+    color:var(--forest);
+    line-height:1.5;
+  }
+
+  /* ---------- The Wall ---------- */
+  .granite-wall{
+    background-image:
+      linear-gradient(165deg, rgba(12,15,12,0.72) 0%, rgba(27,35,28,0.6) 45%, rgba(12,15,12,0.78) 100%),
+      url('black%20granite.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    text-align:center;
+    padding-bottom:0;
+    overflow:hidden;
+  }
+  .granite-wall::before{
+    content:"";
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(100deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 6px);
+    pointer-events:none;
+  }
+  .granite-wall::after{
+    content:"";
+    position:absolute; top:0; left:-20%;
+    width:60%; height:100%;
+    background:linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 90%);
+    pointer-events:none;
+  }
+  .wall-logo-wrap{
+    position:relative;
+    width:150px; height:100px;
+    margin:0 auto var(--space-5);
+  }
+  .wall-logo-wrap::before{
+    content:"";
+    position:absolute;
+    inset:-18px -26px;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.32) 50%, transparent 78%);
+  }
+  .wall-logo{
+    position:relative;
+    width:110px; height:74px;
+    margin:0 auto;
+    background-image:url('logo.png');
+    background-repeat:no-repeat;
+    background-size:136px 136px;
+    background-position:-14px -37px;
+    filter:brightness(0) invert(1);
+    opacity:1;
+  }
+  .granite-wall .eyebrow{ color:var(--tan-light); }
+  .granite-wall .eyebrow::before{ background:var(--tan); }
+  .granite-wall h2{ color:var(--white); }
+  .wall-intro{
+    font-family:var(--font-body);
+    font-size:clamp(17px, 2.2vw, 20px);
+    color:var(--sage-light);
+    max-width:520px;
+    margin:var(--space-4) auto var(--space-8);
+  }
+  .carved-names{
+    position:relative; z-index:1;
+    max-width:760px;
+    margin:0 auto var(--space-8);
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0 var(--space-6);
+  }
+  @media (min-width:640px){
+    .carved-names{ grid-template-columns:repeat(4, 1fr); }
+  }
+  .carved-names span{
+    display:block;
+    font-family:var(--font-ui);
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:rgba(216,232,212,0.55);
+    text-shadow:0 -1px 0 rgba(255,255,255,0.12), 0 1px 1px rgba(0,0,0,0.85);
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+
+  .wall-grid{
+    position:relative; z-index:1;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:var(--space-5);
+    max-width:960px;
+    margin:0 auto;
+  }
+  @media (min-width:760px){
+    .wall-grid{ grid-template-columns:repeat(3, 1fr); gap:var(--space-6); }
+  }
+  .wall-card{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    box-shadow:0 12px 40px rgba(0,0,0,0.35);
+    padding:var(--space-4);
+    text-align:center;
+  }
+  .wall-card img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border-radius:var(--radius-md);
+    background:var(--cream-warm);
+    margin-bottom:var(--space-4);
+  }
+  .wall-card .wall-name{
+    font-family:var(--font-display);
+    font-size:19px;
+    color:var(--forest);
+    margin-bottom:var(--space-2);
+  }
+  .wall-card .wall-quote{
+    font-family:var(--font-body);
+    font-style:italic;
+    font-size:16px;
+    color:var(--gray-warm);
+    line-height:1.5;
+    margin-bottom:var(--space-3);
+  }
+  .wall-card .wall-attr{
+    font-family:var(--font-ui);
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--sage-deep);
+  }
+  .wall-card-empty{
+    border:1.5px dashed rgba(255,255,255,0.25);
+    border-radius:var(--radius-lg);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-3);
+    padding:var(--space-7) var(--space-5);
+    min-height:220px;
+  }
+  .wall-card-empty .plus{
+    width:36px; height:36px;
+    border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.3);
+    color:rgba(255,255,255,0.5);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-ui);
+    font-size:18px;
+  }
+  .wall-card-empty p{
+    font-family:var(--font-body);
+    font-style:italic;
+    font-size:16px;
+    color:rgba(255,255,255,0.45);
+    max-width:180px;
+  }
+  .wall-flowers{
+    position:relative;
+    z-index:1;
+    height:150px;
+    margin-top:var(--space-8);
+    background-image:url('band_lavender.jpg');
+    background-size:cover;
+    background-position:center 55%;
+  }
+  .wall-flowers::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom, rgba(12,15,12,0.85) 0%, rgba(12,15,12,0.15) 35%, rgba(237,229,213,0.1) 75%, var(--cream-warm) 100%);
+  }
+  @media (max-width:560px){ .wall-flowers{ height:110px; } }
+
+  /* ---------- Testimonial ---------- */
+  .testimonial{ background:var(--cream-warm); }
+  .testimonial-card{
+    max-width:680px;
+    margin:0 auto;
+    background:var(--white);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-card);
+    padding:var(--space-7) var(--space-6);
+    text-align:center;
+  }
+  .quote-icon{ width:34px; height:34px; margin:0 auto var(--space-4); }
+  .quote-icon path{ fill:var(--sage-light); }
+  .testimonial-card p.quote{
+    font-family:var(--font-body);
+    font-style:italic;
+    font-size:clamp(19px, 2.6vw, 23px);
+    color:var(--forest);
+    line-height:1.6;
+    margin-bottom:var(--space-6);
+  }
+  .testimonial-attr{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:var(--space-3);
+  }
+  .avatar{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--sage-mist);
+    color:var(--sage-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-ui);
+    font-size:14px;
+    font-weight:500;
+  }
+  .testimonial-attr .who{ text-align:left; }
+  .testimonial-attr .name{ font-family:var(--font-ui); font-size:13px; font-weight:500; color:var(--forest); }
+  .testimonial-attr .ctx{ font-family:var(--font-ui); font-size:12px; color:var(--gray-warm); }
+
+  /* ---------- Objection banner ---------- */
+  .banner{
+    background:linear-gradient(135deg, var(--forest), var(--sage-deep));
+    text-align:center;
+  }
+  .banner .container{ max-width:640px; }
+  .banner-icon{ width:30px; height:30px; margin:0 auto var(--space-5); }
+  .banner-icon path{ stroke:var(--tan-light); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .banner p{
+    font-family:var(--font-display);
+    font-size:clamp(21px, 3.2vw, 28px);
+    font-style:italic;
+    color:var(--white);
+    line-height:1.4;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-head{ text-align:center; max-width:600px; margin:0 auto var(--space-7); }
+  .faq-head h2{ font-size:clamp(28px, 4vw, 38px); }
+  .faq-list{ max-width:680px; margin:0 auto; }
+  .faq-item{
+    border-bottom:1px solid var(--sage-mist);
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:var(--space-4);
+    padding:var(--space-5) 0;
+    font-family:var(--font-ui);
+    font-size:16px;
+    font-weight:500;
+    color:var(--forest);
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-chevron{ width:14px; height:14px; flex-shrink:0; transition:transform 0.25s ease; }
+  .faq-chevron path{ stroke:var(--sage-deep); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .faq-item[open] .faq-chevron{ transform:rotate(180deg); }
+  .faq-item p{
+    font-family:var(--font-body);
+    font-size:18px;
+    color:var(--gray-warm);
+    padding-bottom:var(--space-5);
+    max-width:600px;
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align:center;
+    background:var(--cream-warm);
+  }
+  .final-cta h2{
+    font-size:clamp(30px, 5vw, 44px);
+    max-width:640px;
+    margin:0 auto var(--space-3);
+  }
+  .final-cta .hero-sub{ margin-bottom:var(--space-6); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:var(--space-6) 0 var(--space-7);
+    font-family:var(--font-ui);
+    font-size:12px;
+    color:var(--gray-warm);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#share">Skip to how to share</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#hero" aria-label="Comfort Corner by Diana, home">
+      <span class="brand-logo" role="img" aria-label="Comfort Corner by Diana logo"></span>
+      <span class="brand-text">The Memory Wall</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="mailto:comfortcornerbydiana@gmail.com?subject=Memory%20Wall%20Submission&body=Hi%20Diana%2C%0A%0AI%27d%20like%20to%20add%20a%20tribute%20to%20the%20Memory%20Wall.%0A%0AName%20of%20my%20person%20or%20pet%3A%0AA%20few%20words%20or%20memory%3A%0A%0A(I%27ve%20attached%20a%20photo%20to%20this%20email.)" class="btn btn-primary btn-nav">Share Their Story — Keep Their Memory Alive</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-mesh" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+    <div class="container hero-inner">
+      <span class="eyebrow">A LIVING MEMORY WALL</span>
+      <h1>They deserve to be <span class="headline-word">remembered
+        <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M4 12 C 40 4, 80 18, 110 9 C 140 1, 170 15, 196 8" />
+        </svg>
+      </span> out loud.</h1>
+      <p class="hero-sub">For anyone who lost a parent, a pet, or anyone else the world expects you to "move on" from by now.</p>
+
+      <div class="share-action">
+        <a href="mailto:comfortcornerbydiana@gmail.com?subject=Memory%20Wall%20Submission&body=Hi%20Diana%2C%0A%0AI%27d%20like%20to%20add%20a%20tribute%20to%20the%20Memory%20Wall.%0A%0AName%20of%20my%20person%20or%20pet%3A%0AA%20few%20words%20or%20memory%3A%0A%0A(I%27ve%20attached%20a%20photo%20to%20this%20email.)" class="btn btn-primary">
+          <svg class="sparkle" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z" fill="#FDFAF6"/></svg>
+          Share Their Story — Keep Their Memory Alive
+        </a>
+      </div>
+      <p class="form-note">Just email a photo and a few words. No account, no sign-up.</p>
+
+      <p class="proof"><strong><span class="count-up" data-target="640">640+</span></strong> tributes on the wall so far</p>
+
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Promise -->
+  <section class="promise" id="how-it-works">
+    <div class="container promise-inner reveal">
+      <span class="eyebrow" style="justify-content:center;">HOW IT WORKS</span>
+      <p>Send a photo and a few words about the one you lost — parent, pet, anyone — and we'll add them to our Memory Wall, where their story gets told, not tucked away.</p>
+      <p class="small">There's no timeline on missing someone here. Six days or six years, they still matter, and so do you.</p>
+    </div>
+  </section>
+
+  <div class="botanical-band" role="img" aria-label="Soft sage leaves in the light"></div>
+
+  <!-- Benefits -->
+  <section class="benefits" id="benefits">
+    <div class="container">
+      <div class="benefits-head reveal">
+        <span class="eyebrow" style="justify-content:center;">WHAT CHANGES</span>
+        <h2>What happens when you share</h2>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Finally say the things you've been holding in</p>
+        </div>
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Watch their memory live on where others feel the same ache and actually get it</p>
+        </div>
+        <div class="benefit-card reveal">
+          <svg class="check-icon" viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="25"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <p>Stop feeling like you have to “be over it” just to be around people</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Wall -->
+  <section class="granite-wall" id="the-wall">
+    <div class="container reveal">
+      <div class="wall-logo-wrap">
+        <div class="wall-logo" role="img" aria-label="Comfort Corner by Diana logo"></div>
+      </div>
+      <span class="eyebrow" style="justify-content:center;">THE MEMORY WALL</span>
+      <h2>Their names live here</h2>
+      <p class="wall-intro">A few of the photos and stories already on the wall. Yours could be next to them.</p>
+      <div class="carved-names">
+        <span>Claire LeFevre</span>
+        <span>Elizabeth Allen</span>
+        <span>Susan Allen</span>
+        <span>Becky Allen</span>
+        <span>Donald LeFevre</span>
+        <span>Sherlock</span>
+        <span>Cooper</span>
+        <span>Shana</span>
+      </div>
+      <div class="wall-grid">
+        <div class="wall-card">
+          <img src="my%20mom.jpg" alt="Diana's mom, smiling, wrapped in a blanket">
+          <div class="wall-name">In Loving Memory of Mom</div>
+          <p class="wall-quote">"My best friend. My ride-or-die buddy. Always up for a good cup of coffee."</p>
+          <div class="wall-attr">SHARED BY DIANA</div>
+        </div>
+        <div class="wall-card-empty">
+          <div class="plus">+</div>
+          <p>Space reserved for your person</p>
+        </div>
+        <div class="wall-card-empty">
+          <div class="plus">+</div>
+          <p>Space reserved for your pet</p>
+        </div>
+      </div>
+    </div>
+    <div class="wall-flowers" role="img" aria-label="Lavender left in remembrance at the foot of the wall"></div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="testimonial">
+    <div class="container">
+      <div class="testimonial-card reveal">
+        <svg class="quote-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8c-2.2 0-4 1.8-4 4v6h6v-6H6c0-1.1.9-2 2-2V8zm11 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8z"/></svg>
+        <p class="quote">"I sent in a photo of my dog and three sentences I could barely type through the tears. Seeing him on the wall, with strangers leaving kind words underneath, was the first time this grief felt shared instead of carried alone."</p>
+        <div class="testimonial-attr">
+          <div class="avatar">K.</div>
+          <div class="who">
+            <div class="name">K., Memory Wall contributor</div>
+            <div class="ctx">Shared a tribute for her dog</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objection killer -->
+  <section class="banner">
+    <div class="container reveal">
+      <svg class="banner-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+      <p>It's been years since I lost them — it's still okay to talk about them here, whenever you're ready.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="faq-head reveal">
+        <span class="eyebrow" style="justify-content:center;">BEFORE YOU SHARE</span>
+        <h2>A few honest answers</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>What exactly do I send?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>A photo and a few sentences — a memory, a goodbye letter, whatever feels right. There's no length requirement and nothing has to be polished.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where does it get posted?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>On our Memory Wall on Instagram and Facebook, so their story can be seen — and so others who feel the same ache can find it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is it still okay if it's been years?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>Yes. Grief doesn't run on a schedule. Share whenever you're ready, even decades later.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I have it taken down later?<svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <p>Yes. Just email us and we'll remove it, no questions asked.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="share">
+    <div class="container reveal">
+      <h2>They deserve to be remembered out loud.</h2>
+      <p class="hero-sub">Send their photo. We'll take it from here.</p>
+      <div class="share-action">
+        <a href="mailto:comfortcornerbydiana@gmail.com?subject=Memory%20Wall%20Submission&body=Hi%20Diana%2C%0A%0AI%27d%20like%20to%20add%20a%20tribute%20to%20the%20Memory%20Wall.%0A%0AName%20of%20my%20person%20or%20pet%3A%0AA%20few%20words%20or%20memory%3A%0A%0A(I%27ve%20attached%20a%20photo%20to%20this%20email.)" class="btn btn-primary">
+          <svg class="sparkle" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2z" fill="#FDFAF6"/></svg>
+          Share Their Story — Keep Their Memory Alive
+        </a>
+      </div>
+      <p class="form-note">Just email a photo and a few words. No account, no sign-up.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; The Memory Wall, a Comfort Corner by Diana community. Every story stays yours to keep or remove, always.
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  if('IntersectionObserver' in window){
+    var revealItems = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    revealItems.forEach(function(el){ io.observe(el); });
+
+    var counters = document.querySelectorAll('.count-up');
+    var counted = new WeakSet();
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !counted.has(entry.target)){
+          counted.add(entry.target);
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var duration = 1200;
+          var startTime = null;
+          function step(ts){
+            if(!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var value = Math.floor(progress * target);
+            el.textContent = value.toLocaleString() + '+';
+            if(progress < 1){ requestAnimationFrame(step); }
+            else { el.textContent = target.toLocaleString() + '+'; }
+          }
+          requestAnimationFrame(step);
+          cio.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+  }
+</script>
+
+</body>
+</html>
